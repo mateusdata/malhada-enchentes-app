@@ -1,20 +1,33 @@
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './src/routes/routes';
+import { TamaguiProvider } from 'tamagui';
+import config from './tamagui.config';
+import { useFonts, Poppins_600SemiBold, Poppins_800ExtraBold, Poppins_300Light } from '@expo-google-fonts/poppins';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
 export default function App() {
+
+  const [tamaguiLoaded] = useFonts({
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+  });
+
+  const [fontsLoaded] = useFonts({
+    Poppins_600SemiBold, Poppins_800ExtraBold, Poppins_300Light
+  });
+
+  if (!fontsLoaded || !tamaguiLoaded) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <>
+          <TamaguiProvider config={config}>
+              <Routes />
+          </TamaguiProvider>
+        </>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
