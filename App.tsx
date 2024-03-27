@@ -21,6 +21,7 @@ export default function App() {
     return null;
   }
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
         <>
           <TamaguiProvider config={config}>
@@ -28,6 +29,7 @@ export default function App() {
           </TamaguiProvider>
         </>
       </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
